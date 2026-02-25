@@ -1,23 +1,22 @@
-import React, { useEffect } from "react";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Navigate,
-} from "react-router-dom";
 import { motion } from "framer-motion";
-import Navbar from "./components/Navbar";
-import Footer from "./components/Footer";
+import { useEffect } from "react";
+import {
+    Navigate,
+    Route,
+    BrowserRouter as Router,
+    Routes,
+} from "react-router-dom";
 import BackToTop from "./components/BackToTop";
 import KeyboardShortcuts from "./components/KeyboardShortcuts";
 import KeyboardShortcutsHelp from "./components/KeyboardShortcutsHelp";
+import Navbar from "./components/Navbar";
 import QuickNav from "./components/QuickNav";
-import Home from "./pages/Home";
-import Translate from "./pages/Translate";
-import Learn from "./pages/Learn";
 import About from "./pages/About";
+import Home from "./pages/Home";
+import Learn from "./pages/Learn";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
+import Translate from "./pages/Translate";
 import { useAuthStore } from "./store/authStore";
 import { useTranslationStore } from "./store/translationStore";
 
@@ -58,7 +57,6 @@ const Layout = ({ children }) => {
           {children}
         </motion.div>
       </main>
-      <Footer />
       <BackToTop />
       <KeyboardShortcutsHelp />
       <QuickNav />

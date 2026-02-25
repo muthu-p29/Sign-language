@@ -1,6 +1,6 @@
-import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import path from "path";
+import { defineConfig } from "vite";
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -34,6 +34,15 @@ export default defineConfig({
         target: "http://127.0.0.1:8000",
         changeOrigin: true,
         secure: false,
+      },
+      "/sign": {
+        target: "http://127.0.0.1:8000",
+        changeOrigin: true,
+        secure: false,
+        rewrite: (proxyPath) => {
+          const withoutPrefix = proxyPath.replace(/^\/sign\/?/, "/static/");
+          return withoutPrefix.endsWith(".mp4") ? withoutPrefix : `${withoutPrefix}.mp4`;
+        },
       },
     },
   },

@@ -13,8 +13,9 @@ export function formatVideoUrl(word) {
   // Convert to uppercase for consistency with video file names
   const formattedWord = word.toUpperCase().trim();
   
-  // Return the URL to the video file in the static folder (Django serves assets from /static/)
-  return `/static/${formattedWord}.mp4`;
+  // Mask the real file extension by using a virtual route.
+  // In dev, Vite proxy rewrites /sign/<WORD> -> Django /static/<WORD>.mp4
+  return `/sign/${encodeURIComponent(formattedWord)}`;
 }
 
 /**

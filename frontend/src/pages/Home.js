@@ -1,36 +1,8 @@
-import React from "react";
 import { motion } from "framer-motion";
-import { ArrowRight, Mic, Video, Users, Heart } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const Home = () => {
-  const features = [
-    {
-      icon: Mic,
-      title: "Voice Recognition",
-      description:
-        "Speak naturally and watch your words transform into sign language animations",
-    },
-    {
-      icon: Video,
-      title: "HD Video Quality",
-      description:
-        "Crystal clear sign language videos with smooth animations for better learning",
-    },
-    {
-      icon: Users,
-      title: "Accessible Design",
-      description:
-        "Built with accessibility in mind, supporting keyboard navigation and screen readers",
-    },
-    {
-      icon: Heart,
-      title: "Inclusive Technology",
-      description:
-        "Bridging communication gaps and fostering understanding between communities",
-    },
-  ];
-
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -107,51 +79,6 @@ const Home = () => {
         </div>
       </motion.section>
 
-      {/* Features Section */}
-      <motion.section
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-        variants={containerVariants}
-        className="py-20 px-4 sm:px-6 lg:px-8"
-      >
-        <div className="max-w-7xl mx-auto">
-          <motion.div variants={itemVariants} className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4">
-              Powerful Features
-            </h2>
-            <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-              Our cutting-edge technology makes sign language translation
-              accessible, accurate, and easy to use for everyone.
-            </p>
-          </motion.div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {features.map((feature, index) => (
-              <motion.div
-                key={index}
-                variants={itemVariants}
-                whileHover={{ scale: 1.05 }}
-                className="card p-6 text-center hover:shadow-xl transition-all duration-300"
-              >
-                <div className="w-16 h-16 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <feature.icon
-                    className="text-blue-600 dark:text-blue-400"
-                    size={32}
-                  />
-                </div>
-                <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-2">
-                  {feature.title}
-                </h3>
-                <p className="text-gray-600 dark:text-gray-400">
-                  {feature.description}
-                </p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </motion.section>
-
       {/* Call to Action */}
       <motion.section
         initial="hidden"
@@ -188,46 +115,6 @@ const Home = () => {
               Learn More About Us
             </Link>
           </motion.div>
-        </div>
-      </motion.section>
-
-      {/* Stats Section */}
-      <motion.section
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-        variants={containerVariants}
-        className="py-16 px-4 sm:px-6 lg:px-8"
-      >
-        <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-            <motion.div variants={itemVariants}>
-              <div className="text-3xl md:text-4xl font-bold text-blue-600 dark:text-blue-400 mb-2">
-                1000+
-              </div>
-              <div className="text-gray-600 dark:text-gray-400">
-                Sign Language Videos
-              </div>
-            </motion.div>
-
-            <motion.div variants={itemVariants}>
-              <div className="text-3xl md:text-4xl font-bold text-blue-600 dark:text-blue-400 mb-2">
-                50+
-              </div>
-              <div className="text-gray-600 dark:text-gray-400">
-                Languages Supported
-              </div>
-            </motion.div>
-
-            <motion.div variants={itemVariants}>
-              <div className="text-3xl md:text-4xl font-bold text-blue-600 dark:text-blue-400 mb-2">
-                24/7
-              </div>
-              <div className="text-gray-600 dark:text-gray-400">
-                Available Access
-              </div>
-            </motion.div>
-          </div>
         </div>
       </motion.section>
     </div>

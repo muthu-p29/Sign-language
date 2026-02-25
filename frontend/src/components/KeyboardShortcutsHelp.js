@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { Keyboard, X } from "lucide-react";
+import { useState } from "react";
 
 const KeyboardShortcutsHelp = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -17,6 +17,7 @@ const KeyboardShortcutsHelp = () => {
   return (
     <>
       {/* Floating Help Button */}
+      {/*
       <motion.button
         onClick={() => setIsOpen(true)}
         whileHover={{ scale: 1.1 }}
@@ -26,6 +27,7 @@ const KeyboardShortcutsHelp = () => {
       >
         <Keyboard size={20} />
       </motion.button>
+      */}
 
       {/* Help Modal */}
       <AnimatePresence>

@@ -1,11 +1,11 @@
-import React, { useState } from "react";
 import { motion } from "framer-motion";
-import TextInput from "./TextInput";
-import VoiceInputButton from "./VoiceInputButton";
-import VideoPlayer from "./VideoPlayer";
+import { useState } from "react";
+import { useTranslationStore } from "../store/translationStore";
 import BackButton from "./BackButton";
 import Breadcrumb from "./Breadcrumb";
-import { useTranslationStore } from "../store/translationStore";
+import TextInput from "./TextInput";
+import VideoPlayer from "./VideoPlayer";
+import VoiceInputButton from "./VoiceInputButton";
 
 const TranslatorUI = () => {
   const {
@@ -161,6 +161,7 @@ const TranslatorUI = () => {
         </div>
 
         {/* Instructions */}
+        {/*
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -214,6 +215,7 @@ const TranslatorUI = () => {
             </div>
           </div>
         </motion.div>
+        */}
       </div>
     </div>
   );
