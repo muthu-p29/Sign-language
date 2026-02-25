@@ -32,6 +32,9 @@ urlpatterns = [
     
     # API endpoints
     path('api/translate/', views.api_translate, name='api_translate'),
+    path('api/sign-to-text/start/', views.api_sign_to_text_start, name='api_sign_to_text_start'),
+    path('api/sign-to-text/stop/', views.api_sign_to_text_stop, name='api_sign_to_text_stop'),
+    path('api/sign-to-text/status/', views.api_sign_to_text_status, name='api_sign_to_text_status'),
     path('api/auth/login/', views.api_auth_login, name='api_auth_login'),
     path('api/auth/signup/', views.api_auth_signup, name='api_auth_signup'),
     path('api/auth/logout/', views.api_auth_logout, name='api_auth_logout'),

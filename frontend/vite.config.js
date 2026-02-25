@@ -35,6 +35,12 @@ export default defineConfig({
         changeOrigin: true,
         secure: false,
       },
+      "/signapi": {
+        target: "http://127.0.0.1:5005",
+        changeOrigin: true,
+        secure: false,
+        rewrite: (proxyPath) => proxyPath.replace(/^\/signapi/, ""),
+      },
       "/sign": {
         target: "http://127.0.0.1:8000",
         changeOrigin: true,

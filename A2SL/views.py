@@ -11,6 +11,21 @@ from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
 import nltk
 import json
+import os
+import sys
+import threading
+import time
+
+_SIGN_TO_TEXT_LOCK = threading.Lock()
+_SIGN_TO_TEXT_THREAD = None
+_SIGN_TO_TEXT_STOP_EVENT = None
+_SIGN_TO_TEXT_LATEST = {
+    "running": False,
+    "predicted": None,
+    "confidence": None,
+    "updated_at": None,
+    "error": None,
+}
 
 def home_view(request):
 	return render(request,'home.html')
@@ -61,6 +76,85 @@ def api_translate(request):
         return JsonResponse({'error': 'Invalid JSON'}, status=400)
     except Exception as e:
         return JsonResponse({'error': str(e)}, status=500)
+
+
+def _get_sign1_app_module():
+    """Dynamically import sign1/app.py without requiring it to be an installed package."""
+    base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    sign1_dir = os.path.abspath(os.path.join(base_dir, "..", "sign1"))
+    if sign1_dir not in sys.path:
+        sys.path.insert(0, sign1_dir)
+    import app as sign1_app
+    return sign1_app
+
+
+def _sign_to_text_callback(predicted, confidence):
+    with _SIGN_TO_TEXT_LOCK:
+        _SIGN_TO_TEXT_LATEST["predicted"] = predicted
+        _SIGN_TO_TEXT_LATEST["confidence"] = confidence
+        _SIGN_TO_TEXT_LATEST["updated_at"] = time.time()
+
+
+def _sign_to_text_runner():
+    global _SIGN_TO_TEXT_LATEST
+    global _SIGN_TO_TEXT_STOP_EVENT
+    try:
+        sign1_app = _get_sign1_app_module()
+        sign1_app.run_sign_to_text(
+            stop_event=_SIGN_TO_TEXT_STOP_EVENT,
+            result_callback=_sign_to_text_callback,
+            show_window=False,
+        )
+    except Exception as e:
+        with _SIGN_TO_TEXT_LOCK:
+            _SIGN_TO_TEXT_LATEST["error"] = str(e)
+    finally:
+        with _SIGN_TO_TEXT_LOCK:
+            _SIGN_TO_TEXT_LATEST["running"] = False
+
+
+@require_http_methods(["POST"])
+@csrf_exempt
+def api_sign_to_text_start(request):
+    global _SIGN_TO_TEXT_THREAD
+    global _SIGN_TO_TEXT_STOP_EVENT
+
+    with _SIGN_TO_TEXT_LOCK:
+        if _SIGN_TO_TEXT_THREAD is not None and _SIGN_TO_TEXT_THREAD.is_alive():
+            _SIGN_TO_TEXT_LATEST["running"] = True
+            return JsonResponse({"success": True, "running": True})
+
+        _SIGN_TO_TEXT_STOP_EVENT = threading.Event()
+        _SIGN_TO_TEXT_LATEST.update({
+            "running": True,
+            "predicted": None,
+            "confidence": None,
+            "updated_at": None,
+            "error": None,
+        })
+        _SIGN_TO_TEXT_THREAD = threading.Thread(target=_sign_to_text_runner, daemon=True)
+        _SIGN_TO_TEXT_THREAD.start()
+
+    return JsonResponse({"success": True, "running": True})
+
+
+@require_http_methods(["POST"])
+@csrf_exempt
+def api_sign_to_text_stop(request):
+    global _SIGN_TO_TEXT_STOP_EVENT
+    with _SIGN_TO_TEXT_LOCK:
+        if _SIGN_TO_TEXT_STOP_EVENT is not None:
+            _SIGN_TO_TEXT_STOP_EVENT.set()
+        _SIGN_TO_TEXT_LATEST["running"] = False
+    return JsonResponse({"success": True, "running": False})
+
+
+@require_http_methods(["GET"])
+@csrf_exempt
+def api_sign_to_text_status(request):
+    with _SIGN_TO_TEXT_LOCK:
+        data = dict(_SIGN_TO_TEXT_LATEST)
+    return JsonResponse({"success": True, **data})
 
 
 @require_http_methods(["POST"])

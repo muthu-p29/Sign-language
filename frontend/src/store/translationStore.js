@@ -59,6 +59,14 @@ export const useTranslationStore = create((set, get) => ({
   setCurrentVideoIndex: (index) => set({ currentVideoIndex: index }),
   setIsPlaying: (playing) => set({ isPlaying: playing }),
 
+  clearTranslation: () =>
+    set({
+      translatedWords: [],
+      currentVideoIndex: 0,
+      isPlaying: false,
+      isLoading: false,
+    }),
+
   toggleDarkMode: () =>
     set((state) => {
       const next = !state.darkMode;
