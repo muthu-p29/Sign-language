@@ -260,6 +260,25 @@ def api_auth_user(request):
         return JsonResponse({'error': 'Not authenticated'}, status=401)
 
 
+@require_http_methods(["GET"])
+@csrf_exempt
+def api_letter_sign(request, letter):
+    """API endpoint to get sign language image for a letter"""
+    letter = letter.upper()
+    if len(letter) == 1 and letter.isalpha():
+        # Using a reliable source for ASL alphabet images
+        # These are commonly used GIFs for ASL alphabet
+        image_url = f"https://www.lifeprint.com/asl101/fingerspelling/abc-gifs/{letter.lower()}.gif"
+        return JsonResponse({
+            'success': True,
+            'letter': letter,
+            'image_url': image_url,
+            'description': f"American Sign Language for letter {letter}"
+        })
+    else:
+        return JsonResponse({'success': False, 'error': 'Please provide a single letter (A-Z)'}, status=400)
+
+
 def process_text_to_words(text):
     """
     Process text using NLTK and return words for sign language animation

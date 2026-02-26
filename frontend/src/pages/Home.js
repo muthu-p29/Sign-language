@@ -25,13 +25,13 @@ const Home = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
+    <div className="min-h-[calc(100vh-64px)] bg-gray-50 dark:bg-gray-900 transition-colors duration-300 flex flex-col items-center justify-center">
       {/* Hero Section */}
       <motion.section
         initial="hidden"
         animate="visible"
         variants={containerVariants}
-        className="relative px-4 sm:px-6 lg:px-8 pt-20 pb-16"
+        className="relative px-4 sm:px-6 lg:px-8 py-16 w-full"
       >
         <div className="max-w-7xl mx-auto text-center">
           <motion.h1
@@ -39,7 +39,7 @@ const Home = () => {
             className="text-4xl md:text-6xl lg:text-7xl font-bold text-gray-900 dark:text-gray-100 mb-6"
           >
             Welcome to{" "}
-            <span className="text-blue-600 dark:text-blue-400">SignEase</span>
+            <span className="text-blue-600 dark:text-blue-400">Sign Translation</span>
           </motion.h1>
 
           <motion.p
@@ -63,12 +63,14 @@ const Home = () => {
               <ArrowRight size={20} />
             </Link>
 
+            {/* 
             <Link
               to="/learn"
               className="btn-secondary flex items-center space-x-2 text-lg"
             >
               <span>Learn Sign Language</span>
             </Link>
+*/}
           </motion.div>
         </div>
 
@@ -79,44 +81,7 @@ const Home = () => {
         </div>
       </motion.section>
 
-      {/* Call to Action */}
-      <motion.section
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-        variants={containerVariants}
-        className="py-20 px-4 sm:px-6 lg:px-8 bg-blue-50 dark:bg-blue-900/10"
-      >
-        <div className="max-w-4xl mx-auto text-center">
-          <motion.h2
-            variants={itemVariants}
-            className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-gray-100 mb-6"
-          >
-            Ready to Bridge the Communication Gap?
-          </motion.h2>
 
-          <motion.p
-            variants={itemVariants}
-            className="text-lg text-gray-600 dark:text-gray-400 mb-8"
-          >
-            Join thousands of users who are already using SignEase to
-            communicate more effectively with the deaf and hard-of-hearing
-            community.
-          </motion.p>
-
-          <motion.div
-            variants={itemVariants}
-            className="flex flex-col sm:flex-row gap-4 justify-center"
-          >
-            <Link to="/translate" className="btn-primary text-lg">
-              Try Translation Now
-            </Link>
-            <Link to="/about" className="btn-secondary text-lg">
-              Learn More About Us
-            </Link>
-          </motion.div>
-        </div>
-      </motion.section>
     </div>
   );
 };

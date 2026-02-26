@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
+import { Home, LogIn, Mic, Search, X } from "lucide-react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Search, Home, Mic, BookOpen, Info, LogIn, X } from "lucide-react";
 import { useAuthStore } from "../store/authStore";
 
 const QuickNav = () => {
@@ -19,22 +19,24 @@ const QuickNav = () => {
         ? "Convert speech to sign language"
         : "Login to translate",
     },
-    {
-      name: "Learn",
-      href: "/learn",
-      icon: BookOpen,
-      desc: "Learn sign language alphabet",
-    },
-    { name: "About", href: "/about", icon: Info, desc: "About SignEase" },
+    /*
+        {
+          name: "Learn",
+          href: "/learn",
+          icon: BookOpen,
+          desc: "Learn sign language alphabet",
+        },
+    */
+    //    { name: "About", href: "/about", icon: Info, desc: "About Sign Translation" },
     ...(!isAuthenticated
       ? [
-          {
-            name: "Login",
-            href: "/login",
-            icon: LogIn,
-            desc: "Sign in to your account",
-          },
-        ]
+        {
+          name: "Login",
+          href: "/login",
+          icon: LogIn,
+          desc: "Sign in to your account",
+        },
+      ]
       : []),
   ];
 

@@ -39,6 +39,7 @@ urlpatterns = [
     path('api/auth/signup/', views.api_auth_signup, name='api_auth_signup'),
     path('api/auth/logout/', views.api_auth_logout, name='api_auth_logout'),
     path('api/auth/user/', views.api_auth_user, name='api_auth_user'),
+    path('api/letter-sign/<str:letter>/', views.api_letter_sign, name='api_letter_sign'),
     
     # React frontend (catch-all for SPA routing)
     path('', views.home_view, name='home'),

@@ -1,16 +1,16 @@
-import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { Link, useNavigate } from "react-router-dom";
 import {
-  UserPlus,
+  CheckCircle,
   Eye,
   EyeOff,
   Loader2,
-  CheckCircle,
+  UserPlus,
   XCircle,
 } from "lucide-react";
-import { useAuthStore } from "../store/authStore";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import BackButton from "../components/BackButton";
+import { useAuthStore } from "../store/authStore";
 
 const Signup = () => {
   const [formData, setFormData] = useState({
@@ -109,9 +109,8 @@ const Signup = () => {
 
   const PasswordRequirement = ({ met, text }) => (
     <div
-      className={`flex items-center space-x-2 text-xs ${
-        met ? "text-green-500" : "text-gray-600 dark:text-gray-400"
-      }`}
+      className={`flex items-center space-x-2 text-xs ${met ? "text-green-500" : "text-gray-600 dark:text-gray-400"
+        }`}
     >
       {met ? <CheckCircle size={12} /> : <XCircle size={12} />}
       <span>{text}</span>
@@ -150,7 +149,7 @@ const Signup = () => {
             Create your account
           </h2>
           <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
-            Join SignEase and start bridging communication gaps
+            Join Sign Translation and start bridging communication gaps
           </p>
         </div>
 
@@ -189,9 +188,8 @@ const Signup = () => {
                 required
                 value={formData.username}
                 onChange={handleChange}
-                className={`w-full px-4 py-2 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 ${
-                  errors.username ? "border-red-500 focus:ring-red-500" : ""
-                }`}
+                className={`w-full px-4 py-2 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 ${errors.username ? "border-red-500 focus:ring-red-500" : ""
+                  }`}
                 placeholder="Choose a username"
               />
               {errors.username && (
@@ -216,9 +214,8 @@ const Signup = () => {
                   required
                   value={formData.password1}
                   onChange={handleChange}
-                  className={`w-full px-4 py-2 pr-10 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 ${
-                    errors.password1 ? "border-red-500 focus:ring-red-500" : ""
-                  }`}
+                  className={`w-full px-4 py-2 pr-10 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 ${errors.password1 ? "border-red-500 focus:ring-red-500" : ""
+                    }`}
                   placeholder="Create a strong password"
                 />
                 <button
@@ -278,9 +275,8 @@ const Signup = () => {
                   required
                   value={formData.password2}
                   onChange={handleChange}
-                  className={`w-full px-4 py-2 pr-10 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 ${
-                    errors.password2 ? "border-red-500 focus:ring-red-500" : ""
-                  }`}
+                  className={`w-full px-4 py-2 pr-10 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 ${errors.password2 ? "border-red-500 focus:ring-red-500" : ""
+                    }`}
                   placeholder="Confirm your password"
                 />
                 <button

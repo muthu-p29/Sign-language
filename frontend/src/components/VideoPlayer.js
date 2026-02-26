@@ -4,8 +4,8 @@ import { formatVideoUrl } from "../utils";
 const VideoPlayer = ({
   words = [],
   currentIndex = 0,
-  onVideoEnd = () => {},
-  onIndexChange = () => {},
+  onVideoEnd = () => { },
+  onIndexChange = () => { },
   autoPlay = true,
 }) => {
   const videoRefs = [useRef(null), useRef(null)];
@@ -36,11 +36,13 @@ const VideoPlayer = ({
       }
 
       activeEl.muted = isMuted;
+      activeEl.defaultPlaybackRate = 0.75;
+      activeEl.playbackRate = 0.75;
 
       if (autoPlay) {
         const playPromise = activeEl.play();
         if (playPromise && typeof playPromise.catch === "function") {
-          playPromise.catch(() => {});
+          playPromise.catch(() => { });
         }
         setIsPlaying(true);
       }
@@ -60,6 +62,8 @@ const VideoPlayer = ({
           inactiveEl.load();
         }
         inactiveEl.muted = isMuted;
+        inactiveEl.defaultPlaybackRate = 0.75;
+        inactiveEl.playbackRate = 0.75;
       }
     }
   }, [words, currentIndex, autoPlay, isMuted]);
@@ -120,13 +124,14 @@ const VideoPlayer = ({
       if (inactiveEl && loadedIndexRef.current[inactive] === nextIndex) {
         try {
           inactiveEl.currentTime = 0;
-        } catch {}
+        } catch { }
         activePlayerRef.current = inactive;
         setActivePlayer(inactive);
+        inactiveEl.playbackRate = 0.75;
 
         const playPromise = inactiveEl.play();
         if (playPromise && typeof playPromise.catch === "function") {
-          playPromise.catch(() => {});
+          playPromise.catch(() => { });
         }
         setIsPlaying(true);
       } else if (inactiveEl) {
@@ -141,10 +146,11 @@ const VideoPlayer = ({
         const tryPlay = () => {
           try {
             inactiveEl.currentTime = 0;
-          } catch {}
+          } catch { }
+          inactiveEl.playbackRate = 0.75;
           const playPromise = inactiveEl.play();
           if (playPromise && typeof playPromise.catch === "function") {
-            playPromise.catch(() => {});
+            playPromise.catch(() => { });
           }
           setIsPlaying(true);
         };
@@ -230,20 +236,12 @@ const VideoPlayer = ({
 
       {/* Video Container */}
       <div className="relative bg-black rounded-lg overflow-hidden aspect-video">
-        <div className="absolute top-3 left-3 z-10 flex items-center gap-2">
-          <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-semibold bg-red-600 text-white">
-            LIVE
-          </span>
-          <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-black/60 text-white">
-            Real-time mode
-          </span>
-        </div>
+
         <div className="absolute inset-0">
           <video
             ref={videoRefs[0]}
-            className={`absolute inset-0 w-full h-full object-cover ${
-              activePlayer === 0 ? "opacity-100" : "opacity-0"
-            }`}
+            className={`absolute inset-0 w-full h-full object-cover ${activePlayer === 0 ? "opacity-100" : "opacity-0"
+              }`}
             onTimeUpdate={activePlayer === 0 ? handleTimeUpdate : undefined}
             onLoadedMetadata={activePlayer === 0 ? handleLoadedMetadata : undefined}
             onEnded={activePlayer === 0 ? handleVideoEnd : undefined}
@@ -254,9 +252,8 @@ const VideoPlayer = ({
           />
           <video
             ref={videoRefs[1]}
-            className={`absolute inset-0 w-full h-full object-cover ${
-              activePlayer === 1 ? "opacity-100" : "opacity-0"
-            }`}
+            className={`absolute inset-0 w-full h-full object-cover ${activePlayer === 1 ? "opacity-100" : "opacity-0"
+              }`}
             onTimeUpdate={activePlayer === 1 ? handleTimeUpdate : undefined}
             onLoadedMetadata={activePlayer === 1 ? handleLoadedMetadata : undefined}
             onEnded={activePlayer === 1 ? handleVideoEnd : undefined}

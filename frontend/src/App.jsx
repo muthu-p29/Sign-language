@@ -1,19 +1,17 @@
 import { motion } from "framer-motion";
 import { useEffect } from "react";
 import {
-    Navigate,
-    Route,
-    BrowserRouter as Router,
-    Routes,
+  Navigate,
+  Route,
+  BrowserRouter as Router,
+  Routes,
 } from "react-router-dom";
 import BackToTop from "./components/BackToTop";
 import KeyboardShortcuts from "./components/KeyboardShortcuts";
 import KeyboardShortcutsHelp from "./components/KeyboardShortcutsHelp";
 import Navbar from "./components/Navbar";
 import QuickNav from "./components/QuickNav";
-import About from "./pages/About";
 import Home from "./pages/Home";
-import Learn from "./pages/Learn";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Translate from "./pages/Translate";
@@ -111,6 +109,7 @@ function App() {
           }
         />
 
+        {/* 
         <Route
           path="/learn"
           element={
@@ -119,7 +118,9 @@ function App() {
             </Layout>
           }
         />
+*/}
 
+        {/* 
         <Route
           path="/about"
           element={
@@ -128,6 +129,7 @@ function App() {
             </Layout>
           }
         />
+*/}
 
         {/* Protected routes with full layout */}
         <Route

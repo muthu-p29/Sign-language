@@ -1,6 +1,5 @@
-import React from "react";
 import { motion } from "framer-motion";
-import { Github, Mail, Heart } from "lucide-react";
+import { Github, Heart, Mail } from "lucide-react";
 
 const Footer = () => {
   return (
@@ -10,7 +9,7 @@ const Footer = () => {
           {/* Brand */}
           <div className="space-y-4">
             <h3 className="text-lg font-bold text-blue-600 dark:text-blue-400">
-              SignEase
+              Sign Translation
             </h3>
             <p className="text-gray-600 dark:text-gray-400 text-sm">
               Bridging the gap between speech and sign language through
@@ -28,9 +27,8 @@ const Footer = () => {
               {["Home", "Translate", "Learn", "About"].map((link) => (
                 <li key={link}>
                   <motion.a
-                    href={`/${
-                      link.toLowerCase() === "home" ? "" : link.toLowerCase()
-                    }`}
+                    href={`/${link.toLowerCase() === "home" ? "" : link.toLowerCase()
+                      }`}
                     whileHover={{ x: 4 }}
                     className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-300 text-sm"
                   >
@@ -58,7 +56,7 @@ const Footer = () => {
                 <Github size={20} />
               </motion.a>
               <motion.a
-                href="mailto:contact@signease.com"
+                href="mailto:contact@signtranslation.com"
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
                 className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-300"
@@ -73,7 +71,7 @@ const Footer = () => {
         <div className="mt-8 pt-8 border-t border-gray-200 dark:border-gray-700">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <p className="text-gray-600 dark:text-gray-400 text-sm">
-              © 2025 SignEase. All rights reserved.
+              © 2026 Sign Translation. All rights reserved.
             </p>
             <motion.div
               initial={{ opacity: 0 }}

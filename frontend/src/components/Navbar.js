@@ -1,19 +1,17 @@
-import React, { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import {
-  Menu,
-  X,
-  Sun,
-  Moon,
   Home,
-  Mic,
-  BookOpen,
-  Info,
   LogIn,
   LogOut,
+  Menu,
+  Mic,
+  Moon,
+  Sun,
   UserPlus,
+  X
 } from "lucide-react";
+import { useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 import { useAuthStore } from "../store/authStore";
 import { useTranslationStore } from "../store/translationStore";
 
@@ -27,16 +25,16 @@ const Navbar = () => {
   const navigation = [
     { name: "Home", href: "/", icon: Home },
     { name: "Translate", href: "/translate", icon: Mic, requireAuth: true },
-    { name: "Learn", href: "/learn", icon: BookOpen },
-    { name: "About", href: "/about", icon: Info },
+    //    { name: "Learn", href: "/learn", icon: BookOpen },
+    //    { name: "About", href: "/about", icon: Info },
   ];
 
   const authLinks = isAuthenticated
     ? [{ name: "Logout", onClick: logout, icon: LogOut }]
     : [
-        { name: "Login", href: "/login", icon: LogIn },
-        { name: "Sign Up", href: "/signup", icon: UserPlus },
-      ];
+      { name: "Login", href: "/login", icon: LogIn },
+      { name: "Sign Up", href: "/signup", icon: UserPlus },
+    ];
 
   const isActive = (path) => location.pathname === path;
 
@@ -52,7 +50,7 @@ const Navbar = () => {
                 whileTap={{ scale: 0.95 }}
                 className="text-blue-600 dark:text-blue-400 text-xl font-bold"
               >
-                SignEase
+                Sign Translation
               </motion.div>
             </Link>
           </div>
@@ -66,11 +64,10 @@ const Navbar = () => {
                 <Link
                   key={item.name}
                   to={item.href}
-                  className={`flex items-center space-x-1 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-300 ${
-                    isActive(item.href)
-                      ? "text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20"
-                      : "text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20"
-                  }`}
+                  className={`flex items-center space-x-1 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-300 ${isActive(item.href)
+                    ? "text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20"
+                    : "text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20"
+                    }`}
                 >
                   <Icon size={16} />
                   <span>{item.name}</span>
@@ -86,11 +83,10 @@ const Navbar = () => {
                   to={item.href}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className={`flex items-center space-x-1 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-300 ${
-                    isActive(item.href)
-                      ? "text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20"
-                      : "text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20"
-                  }`}
+                  className={`flex items-center space-x-1 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-300 ${isActive(item.href)
+                    ? "text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20"
+                    : "text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20"
+                    }`}
                 >
                   <item.icon size={16} />
                   <span>{item.name}</span>
@@ -100,7 +96,7 @@ const Navbar = () => {
                   key={item.name}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  onClick={item.onClick || (() => {})}
+                  onClick={item.onClick || (() => { })}
                   className="flex items-center space-x-1 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-300 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20"
                 >
                   <item.icon size={16} />
@@ -149,11 +145,10 @@ const Navbar = () => {
                 key={item.name}
                 to={item.href}
                 onClick={() => setIsOpen(false)}
-                className={`flex items-center space-x-2 px-3 py-2 rounded-md text-base font-medium transition-colors duration-300 ${
-                  isActive(item.href)
-                    ? "text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20"
-                    : "text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20"
-                }`}
+                className={`flex items-center space-x-2 px-3 py-2 rounded-md text-base font-medium transition-colors duration-300 ${isActive(item.href)
+                  ? "text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20"
+                  : "text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20"
+                  }`}
               >
                 <Icon size={20} />
                 <span>{item.name}</span>
